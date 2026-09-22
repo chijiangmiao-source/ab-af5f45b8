@@ -1,0 +1,414 @@
+:root {
+  --bg: #0e1320;
+  --panel: #161d2e;
+  --panel-2: #1c2538;
+  --border: #2a3550;
+  --text: #dbe3f4;
+  --muted: #8b96b0;
+  --accent: #5aa2ff;
+  --req: #34d399;
+  --opt: #fbbf24;
+  --nev: #7c869c;
+  --bad: #f87171;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+  line-height: 1.55;
+}
+
+.mono,
+textarea,
+.gutter,
+.bitrow,
+td.cell {
+  font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+}
+
+header h1 {
+  font-size: 22px;
+  margin: 0 0 6px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(340px, 460px) 1fr;
+  gap: 16px;
+  align-items: start;
+  margin-top: 18px;
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+}
+
+.panel h2 {
+  font-size: 15px;
+  margin: 0 0 10px;
+  color: #cfe0ff;
+}
+
+.field {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.field input {
+  display: block;
+  width: 120px;
+  margin-top: 4px;
+  padding: 6px 8px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.field input.invalid {
+  border-color: var(--bad);
+}
+
+.editor {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--panel-2);
+}
+
+.gutter {
+  padding: 8px 6px;
+  text-align: right;
+  color: var(--muted);
+  background: #141a29;
+  font-size: 12px;
+  line-height: 1.5;
+  user-select: none;
+  overflow: hidden;
+  max-height: 340px;
+  min-width: 38px;
+}
+
+.gutter .bad-line {
+  color: #fff;
+  background: var(--bad);
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+textarea {
+  flex: 1;
+  border: 0;
+  resize: vertical;
+  background: transparent;
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  min-height: 320px;
+  max-height: 340px;
+  outline: none;
+  white-space: pre;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button {
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+.issues ul {
+  margin: 8px 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.issues li {
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 13px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.tag.line {
+  background: #3b2337;
+  color: #fda4af;
+}
+
+.tag.global {
+  background: #23314d;
+  color: #9ec1ff;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  min-width: 96px;
+  text-align: center;
+}
+
+.card-value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.card-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.card.accent .card-value {
+  color: var(--accent);
+}
+
+.card.req .card-value {
+  color: var(--req);
+}
+
+.card.opt .card-value {
+  color: var(--opt);
+}
+
+.card.nev .card-value {
+  color: var(--nev);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  counter-reset: chip;
+}
+
+.chip {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  background: #1a2a1f;
+  border: 1px solid #2c4a38;
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+.chip::before {
+  counter-increment: chip;
+  content: counter(chip);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.chip-id {
+  font-weight: 700;
+  color: #b7f7d8;
+  font-family: Menlo, Consolas, monospace;
+}
+
+.chip-cost {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+th,
+td {
+  padding: 4px 7px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  white-space: nowrap;
+}
+
+th {
+  color: var(--muted);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+}
+
+th.pivot-col {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+
+td.cell.off {
+  color: #46506b;
+}
+
+td.cell.on {
+  color: #9ec1ff;
+  font-weight: 700;
+}
+
+tr.in-basis td {
+  background: rgba(52, 211, 153, 0.07);
+}
+
+tr.in-basis td:first-child {
+  border-left: 3px solid var(--req);
+}
+
+.badge {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.required {
+  background: rgba(52, 211, 153, 0.16);
+  color: var(--req);
+  border: 1px solid rgba(52, 211, 153, 0.45);
+}
+
+.badge.optional {
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--opt);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.badge.never {
+  background: rgba(124, 134, 156, 0.12);
+  color: var(--nev);
+  border: 1px solid rgba(124, 134, 156, 0.35);
+}
+
+.legend {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 12px;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rref {
+  display: inline-block;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 6px 0;
+}
+
+.rref-row {
+  line-height: 1.7;
+}
+
+.bit {
+  display: inline-block;
+  width: 18px;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.bit.on {
+  color: #9ec1ff;
+  font-weight: 700;
+}
+
+.bit.off {
+  color: #46506b;
+}
+
+.bit.pivot {
+  background: rgba(90, 162, 255, 0.22);
+  color: #cfe4ff;
+}
+
+.pivot-tag {
+  background: #1d2c47;
+  color: #9ec1ff;
+  margin-left: 4px;
+}
+
+.ok {
+  color: var(--req);
+  font-size: 13px;
+}
+
+.bad {
+  color: var(--bad);
+  font-size: 13px;
+}
